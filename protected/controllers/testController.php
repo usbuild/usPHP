@@ -1,6 +1,6 @@
 <?php
-class testController {
+class TestController extends Controller {
     public function indexAction(){
-        echo "Hello World!";
+        $this->render("index.php", array());
     }
 }
