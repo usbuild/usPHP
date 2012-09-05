@@ -14,6 +14,5 @@ abstract class Controller
             . $this->controllerId . DIRECTORY_SEPARATOR . $view;
         extract($data);
         include($viewPath);
-
     }
 }

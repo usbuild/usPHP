@@ -13,7 +13,7 @@ class Application
         $this->config = require($config);
         self::$default_config = require(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'default_config.php');
         self::loadDirectory(dirname(__FILE__));
-        self::import('application.controller.*');
+        $this->DBInit();
         self::import('application.model.*');
     }
 
@@ -24,7 +24,13 @@ class Application
 
     public function __get($key)
     {
+        if (isset($this->$key)) return $this->$key;
         return null;
+    }
+
+    public function DBInit()
+    {
+        $this->db = new MySQLDB($this->config);
     }
 
 
@@ -33,6 +39,9 @@ class Application
         list($controllerID, $actionID) = self::getControllerAction();
         $controllerName = ucfirst($controllerID) . 'Controller';
         $actionName = $actionID . 'Action';
+
+        self::import('application.controller.' . $controllerName);
+
         if (!class_exists($controllerName)) {
             throw new Exception("No such Controller");
         }
@@ -57,7 +66,7 @@ class Application
         if ($last_flag == '*') {
             self::loadDirectory(self::getPathByAlias(implode('.', $str_array)));
         } else {
-            require_once(self::getPathByAlias(implode('.', $str_array) . $last_flag . 'php'));
+            require_once(self::getPathByAlias(implode('.', $str_array)) . DIRECTORY_SEPARATOR . $last_flag . '.php');
         }
     }
 
