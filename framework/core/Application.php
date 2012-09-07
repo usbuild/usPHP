@@ -75,7 +75,10 @@ class Application
         $str_array = explode('.', $alias);
         $res = '';
         foreach ($str_array as $value) {
-            $res .= self::$default_config['alias'][$value];
+            if(array_key_exists($value, self::$default_config['alias']))
+                $res .= self::$default_config['alias'][$value];
+            else
+                $res .= $value;
             $res .= DIRECTORY_SEPARATOR;
         }
         return WEBROOT . DIRECTORY_SEPARATOR . substr($res, 0, -1);
