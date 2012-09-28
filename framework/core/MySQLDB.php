@@ -6,6 +6,7 @@
  * Time: 下午9:18
  * To change this template use File | Settings | File Templates.
  */
+require_once "AbstractDB.php";
 class MySQLDB extends AbstractDB
 {
     public function __construct($config)

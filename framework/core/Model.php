@@ -80,11 +80,13 @@ abstract class Model
 
     public function findByPk($pk)
     {
-        return $this->select(array('where' => array($this->tableInfo()['pk'] => $pk), 'limit'=>1));
+        $info = $this->tableInfo();
+        return $this->select(array('where' => array($info['pk'] => $pk), 'limit'=>1));
     }
 
     public function findAllByPk($pk)
     {
-        return $this->select(array('where' => array($this->tableInfo()['pk'] => $pk)));
+        $info = $this->tableInfo();
+        return $this->select(array('where' => array($info['pk'] => $pk)));
     }
 }

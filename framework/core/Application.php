@@ -86,8 +86,8 @@ class Application
 
     public static function getControllerAction()
     {
-        $redirect_url = $_SERVER['REDIRECT_URL'];
-        $res = array_slice(explode('/', $redirect_url), -2);
+        $request_uri = $_SERVER['REQUEST_URI'];
+        $res = array_slice(explode('/', $request_uri), -2);
         return $res;
     }
 
