@@ -46,6 +46,9 @@ class Application
             throw new Exception("No such Controller");
         }
         $controller = new $controllerName($controllerID);
+        if (method_exists($controller, "init")) {
+            $controller->init();
+        }
         if (!method_exists($controller, $actionName)) {
             throw new Exception("No such Action");
         }

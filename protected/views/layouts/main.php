@@ -1,2 +1,2 @@
-<h1>This is Layout!</h1>
+<h5>This usPHP Framework Layout</h5>
 <?php echo $content;?>
